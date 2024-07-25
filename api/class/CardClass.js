@@ -26,17 +26,17 @@ class ManagerCard {
     async createCard() {
         try {
             await CardModel.create({
-                thisuserId:this.userId,
-                thisaccountId:this.accountId,
-                thiscardNumber:this.cardNumber,
-                thiscardType:this.cardType,
-                thisexpirationDate:this.expirationDate,
-                thissecurityCode:this.securityCode,
-                thisstatus:this.status,
+                userId:this.userId,
+                accountId:this.accountId,
+                cardNumber:this.cardNumber,
+                cardType:this.cardType,
+                expirationDate:this.expirationDate,
+                securityCode:this.securityCode,
+                status:this.status,
             })
             return "ok";
         } catch (error) {
-            throw new Error(`Error al crear cuenta:${error}`);
+            throw new Error(`Error al crear tarjeta:${error}`);
         }
 
     }
@@ -46,7 +46,7 @@ class ManagerCard {
             const cards = await CardModel.find();
             return cards;
         } catch (error) {
-            throw new Error(`Error al obtener cuentas:${error}`)
+            throw new Error(`Error al obtener tarjetas:${error}`)
         }
         
     }
@@ -56,7 +56,7 @@ class ManagerCard {
             const card = await CardModel.findById(id);
             return card;
         } catch (error) {
-            throw new Error(`Error al obtener cuenta:${error}`)
+            throw new Error(`Error al obtener tarjeta:${error}`)
         }
     }
 

@@ -70,6 +70,7 @@ class ManagerAccount{
                 userId:this.userId,
                 accountType:this.accountType,
                 balance:this.balance,
+                accountNumber: this.accountNumber,
             })
             return "ok";
         } catch (error) {
