@@ -1,18 +1,19 @@
-//Crear una tarjeta
-//Obtener una tarjeta
-//Obtener tarjetas
-
-import CardModel from "../models/CardModel.js";
+//agregar tarjeta
+//obtener una tarjeta
+//obtener targetas
+import CardModel from "../models/CardModel.js"
 
 
 class ManagerCard {
-    constructor(userId,
+    constructor(
+        userId,
         accountId,
         cardNumber,
         cardType,
         expirationDate,
         securityCode,
-        status) {
+        status
+    ) {
         this.userId = userId;
         this.accountId = accountId;
         this.cardNumber = cardNumber;
@@ -25,37 +26,40 @@ class ManagerCard {
     async createCard() {
         try {
             await CardModel.create({
-                userId: this.userId,
-                accountId: this.accountId,
-                cardNumber: this.cardNumber,
-                cardType: this.cardType,
-                expirationDate: this.expirationDate,
-                securityCode: this.securityCode,
-                status: this.status
-            });
-            return "Ok";
+                thisuserId:this.userId,
+                thisaccountId:this.accountId,
+                thiscardNumber:this.cardNumber,
+                thiscardType:this.cardType,
+                thisexpirationDate:this.expirationDate,
+                thissecurityCode:this.securityCode,
+                thisstatus:this.status,
+            })
+            return "ok";
         } catch (error) {
-            throw new Error(`Error al crear tarjeta: ${error}`);
+            throw new Error(`Error al crear cuenta:${error}`);
         }
+
     }
 
-    async getCards() {
+    async getCards(){
         try {
             const cards = await CardModel.find();
             return cards;
         } catch (error) {
-            throw new Error(`Error al obtener tarjetas: ${error}`);
+            throw new Error(`Error al obtener cuentas:${error}`)
         }
+        
     }
 
-    async getCard(id) {
+    async getCard(id){
         try {
             const card = await CardModel.findById(id);
             return card;
         } catch (error) {
-            throw new Error(`Error al obtener tarjeta: ${error}`);
+            throw new Error(`Error al obtener cuenta:${error}`)
         }
     }
+
 }
 
 export default ManagerCard;

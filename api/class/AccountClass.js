@@ -1,75 +1,79 @@
-//Obtener cuenta
-//Obtener cuentas
-//Agregar balance
-//Restar balance
-//Crear una cuenta
-
+//obtener cuenta
+//obtener cuentas
+//editar balance
+//crear cuenta
 import AccountModel from "../models/AccountModel.js";
-class ManagerAccount {
-    constructor(userId, accountNumber, accountType, balance) {
-        this.userId = userId;
-        this.accountNumber = accountNumber;
-        this.accountType = accountType;
-        this.balance = balance;
+
+class ManagerAccount{
+    constructor(
+        userId,
+        accountNumber,
+        balance,
+        accountType,
+    ){
+        this.userId=userId;
+        this.accountNumber=accountNumber;
+        this.accountType=accountType;
+        this.balance=balance;
     }
 
-    async getAccounts() {
+    async getAccounts(){
         try {
             const accounts = await AccountModel.find();
             return accounts;
         } catch (error) {
-            throw new Error(`Error al obtener cuentas: ${error}`);
+            throw new Error(`Error al obtener cuentas:${error}`)
         }
+        
     }
 
-    async getAccount(id) {
+    async getAccount(id){
         try {
             const account = await AccountModel.findById(id);
             return account;
         } catch (error) {
-            throw new Error(`Error al obtener cuenta: ${error}`);
+            throw new Error(`Error al obtener cuenta:${error}`)
         }
     }
 
-    async addBalance(id, amount) {
+    async addBalance(id, amount){
         try {
             this.balance += amount;
-            await AccountModel.findByIdAndUpdate(id, {
-                $set: {
+            await AccountModel.findByIdAndUpdate(id,{
+                $set:{
                     balance: this.balance
                 }
-            });
-            return "Ok";
+            })
+            return "ok";
         } catch (error) {
-            throw new Error(`Error al agregar monto: ${error}`);
+            throw new Error(`Error al agregar monto:${error}`)
         }
     }
 
-    async restBalance(id, amount) {
+    async restBalance(id, amount){
         try {
             this.balance -= amount;
-            await AccountModel.findByIdAndUpdate(id, {
-                $set: {
-                    balance: this.balance
+            await AccountModel.findByIdAndUpdate(id,{
+                $set:{
+                    balance:this.balance
                 }
-            });
-            return "Ok";
+            })
+            return "ok";
         } catch (error) {
-            throw new Error(`Error al agregar monto: ${error}`);
+            throw new Error(`Error al agregar monto:${error}`)
         }
     }
 
-    async createAccount() {
+    async createAccount(){
         try {
             await AccountModel.create({
-                userId: this.userId,
-                accountNumber: this.accountNumber,
-                accountType: this.accountType,
-                balance: this.balance
-            });
-            return "Ok";
+                userId:this.userId,
+                accountType:this.accountType,
+                balance:this.balance,
+            })
+            return "ok";
         } catch (error) {
-            throw new Error(`Error al crear cuenta: ${error}`);
+            throw new Error(`Error al crear cuenta:${error}`);
         }
     }
 }
